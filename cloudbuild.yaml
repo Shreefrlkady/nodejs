@@ -1,0 +1,12 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/charged-ridge-434119-s5/my-image:$COMMIT_SHA', '.']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/charged-ridge-434119-s5/my-image:$COMMIT_SHA']
+images:
+  - 'gcr.io/charged-ridge-434119-s5/my-image:$COMMIT_SHA'
+options:
+  logging: CLOUD_LOGGING_ONLY
+  defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
+logsBucket: gs://datadog-test-sh
+serviceAccount: codebuild-test@charged-ridge-434119-s5.iam.gserviceaccount.com
